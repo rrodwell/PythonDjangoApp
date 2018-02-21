@@ -3,6 +3,6 @@ from django.db import models
 # Create your models here.
 
 class Appointment(models.Model):
-    date = models.DateField()
+    date = models.CharField(max_lenth=260)
     time = models.CharField(max_length=10)
     description = models.CharField(max_length=260)
