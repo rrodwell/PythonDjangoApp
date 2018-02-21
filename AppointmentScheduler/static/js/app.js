@@ -1,56 +1,91 @@
 
 // Initial Values
-var name = "";
-var role = "";
-var startDate = "";
-var monthlyRate = "";
-var totalBilled = "";
-var numMonths = "";
+var date = "";
+var time = "";
+var description = "";
 
-// Capture Button Click
-$("#submit-btn").on("click", function(event) {
-  console.log("done");
-  event.preventDefault();
-
-  // Grabbed values from text boxes
-  name = $("#name-employee").val().trim();
-  role = $("#role").val().trim();
-  startDate = $("#start-date").val().trim();
-  monthlyRate = $("#monthly-rate").val().trim();
-
-  $("name-employee").val("");
-  $("role").val("");
-  $("start-date").val("");
-  $("monthly-rate").val("");
-
-  // Code for handling the push
-  database.ref().push({
-    name: name,
-    role: role,
-    startDate: startDate,
-    monthlyRate: monthlyRate,
-    dateAdded: firebase.database.ServerValue.TIMESTAMP
-  });
-
-});
-
-$("#add-appt").on("click", function() {
-
+//Displays form for new appointments
+function NewAppt() {
   $("#add-appt").css("display", "none");
-  $("#appt-form").css("display","block");
-  $("#add-btn").css("display","inline-block");
-  $("#cancel-btn").css("display","inline-block");
+  $("#appt-form").css("display", "block");
+  $("#add-btn").css("display", "inline-block");
+  $("#cancel-btn").css("display", "inline-block");
+}
 
-});
-
-$("#cancel-btn").on("click", function() {
-
+//Closes form for new appointments
+function CloseAppt(){
   $("#add-appt").css("display", "inline-block");
-  $("#appt-form").css("display","none");
-  $("#add-btn").css("display","none");
-  $("#cancel-btn").css("display","none");
+  $("#appt-form").css("display", "none");
+  $("#add-btn").css("display", "none");
+  $("#cancel-btn").css("display", "none");
+}
 
+function SubmitAppt(date,time,desc){
+  // $.ajax({
+  //   url: "/do_something/",
+  //   type: "POST",
+  //   data: {
+  //     date: date,
+  //     time: time,
+  //     description: desc
+  //   },
+  //   dataType: 'json'
+  // });
+
+  console.log("create post is working!")
+  $.ajax({
+    url: "/", // the endpoint
+    type: "POST",
+    data: {
+      date: date,
+      time: time,
+      description: desc
+    },
+
+    // handle a successful response
+    success: function (json) {
+      CloseAppt();
+      console.log(json);
+      console.log("success");
+    },
+
+    // handle a non-successful response
+    error: function (xhr, errmsg, err) {
+      console.log(xhr.status + ": " + xhr.responseText);
+    }
+  });
+}
+
+//Searches for appointments
+function Search(){
+}
+
+//Gets all appointments from the DB
+function getAppointments(){
+
+}
+
+
+$(document).ready(getAppointments);
+
+$("#add-btn").on("click", function(event) {
+  event.preventDefault();
+  console.log("Post submitted");
+  // Grabbed values from text boxes
+  date = $("#appt-date").val().trim();
+  time = $("#appt-time").val().trim();
+  description = $("#appt-description").val().trim();
+
+  $("#appt-date").val("");
+  $("#appt-time").val("");
+  $("#appt-description").val("");
+
+  SubmitAppt(date,time,description);
 });
+
+$("#add-appt").on("click", NewAppt);
+
+$("#cancel-btn").on("click", CloseAppt);
 
 
 // // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")

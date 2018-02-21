@@ -32,16 +32,17 @@
                 <button class="btn btn-outline-secondary" id="add-appt">
                     New Appointment
                 </button>
-                <button class="btn btn-outline-success" id="add-btn">
+                <!-- <button class="btn btn-outline-success" id="add-btn">
                     Add
-                </button>
+                </button> -->
                 <button class="btn btn-outline-danger" id="cancel-btn">
                     Cancel
                 </button>
             </div>
 
             <div id="appt-form">
-                <form role="form">
+                <!-- <form method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="appt-date">Date (MM/DD/YY - ex: 01/01/89)</label>
                         <input type="text" class="form-control" id="appt-date">
@@ -56,6 +57,28 @@
                         </label>
                         <textarea type="text" class="form-control" id="appt-description" rows="3"></textarea>
                     </div>
+                </form> -->
+                <form method="POST">
+                    {{ form.as_p }}
+
+                    <div class="form-group">
+                        <label for="appt-date">Date (MM/DD/YY - ex: 01/01/89)</label>
+                        <input type="text" class="form-control" id="appt-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="appt-time">Time (HH:MM - ex: 05:30)</label>
+                        <input type="text" class="form-control" id="appt-time">
+                    </div>
+                    <div class="form-group">
+                        <label for="appt-description">
+                            Description
+                        </label>
+                        <textarea type="text" class="form-control" id="appt-description" rows="3"></textarea>
+                    </div>
+
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-outline-success" value="Add">
+
                 </form>
             </div>
         </div>
@@ -103,8 +126,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static "js/app.js" %}"></script>

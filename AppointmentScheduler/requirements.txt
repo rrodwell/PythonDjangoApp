@@ -1,0 +1,7 @@
+certifi==2018.1.18
+Django==1.11.8
+Faker==0.8.11
+python-dateutil==2.6.1
+pytz==2018.3
+six==1.11.0
+text-unidecode==1.1
