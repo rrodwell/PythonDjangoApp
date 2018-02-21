@@ -1,4 +1,11 @@
-$(document).ready(getAppointments);
+$(document).ready(function(){
+
+  data = {
+
+  };
+
+  // getAppointments(data);
+});
 
 $("#add-btn").on("click", function(e) {
   e.preventDefault();
@@ -23,6 +30,23 @@ $("#add-appt").on("click", NewAppt);
 $("#cancel-btn").on("click", CloseAppt);
 
 
+$("#search-btn").on("click", function (e) {
+  e.preventDefault();
+  console.log("GET submitted");
+  // Grabbed values from text boxes
+  data = {
+    description: $("#search").val().trim(),
+    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+  }
+
+  $("#search").val("");
+
+  // console.log(JSON.stringify(data));
+  getAppointments(data);
+});
+
+//FUNCTIONS
+
 //Displays form for new appointments
 function NewAppt() {
   $("#add-appt").css("display", "none");
@@ -40,9 +64,7 @@ function CloseAppt() {
 }
 
 function SubmitAppt(apptData) {
-
   console.log("create post is working!")
-
   console.log(JSON.stringify(apptData));
 
   $.ajax({
@@ -59,13 +81,26 @@ function SubmitAppt(apptData) {
 }
 
 //Searches for appointments
-function Search() {
+function getAppointments(queryParam) {
+  console.log("create post is working!")
+  console.log(JSON.stringify(queryParam));
 
+  $.ajax({
+    type: "GET",
+    url: "/find/appt/", // the endpoint
+    data: queryParam,
+    success: function (data) {
+      console.log("Searching...");
+      console.log("Yo I got your data here: ",data);
+      populateTable(data);
+    }
+
+  });
 
 }
 
 //Gets all appointments from the DB
-function getAppointments() {
+function buildTable() {
 
 }
 
