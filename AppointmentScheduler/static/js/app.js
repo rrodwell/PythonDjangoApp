@@ -72,13 +72,13 @@ $("#add-btn").on("click", function(event) {
   event.preventDefault();
   console.log("Post submitted");
   // Grabbed values from text boxes
-  date = $("#appt-date").val().trim();
-  time = $("#appt-time").val().trim();
-  description = $("#appt-description").val().trim();
+  date = $("#id_date").val().trim();
+  time = $("#id_time").val().trim();
+  description = $("#id_description").val().trim();
 
-  $("#appt-date").val("");
-  $("#appt-time").val("");
-  $("#appt-description").val("");
+  $("#id_date").val("");
+  $("#id_time").val("");
+  $("#id_description").val("");
 
   SubmitAppt(date,time,description);
 });

@@ -20,5 +20,4 @@ from scheduler import views
 urlpatterns = [
     url(r'^$',views.index, name='index'),
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.new_appt,name='form_name')
 ]

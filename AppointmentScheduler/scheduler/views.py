@@ -14,11 +14,12 @@ def index(request):
     return render(request,'scheduler/index.html', context=appt_dict)
 
 def new_appt(request):
-    
+
     form = NewApptForm()
 
     if request.method == "POST":
         form = NewApptForm(request.POST)
+        print(form)
 
         if form.is_valid():
             form.save(commit=True)
