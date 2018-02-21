@@ -1,10 +1,9 @@
 $(document).ready(function(){
-
-  data = {
-
+  startData = {
+    description: "",
+    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
   };
-
-  // getAppointments(data);
+  getAppointments(startData);
 });
 
 $("#add-btn").on("click", function(e) {
@@ -72,7 +71,8 @@ function SubmitAppt(apptData) {
     url: "/appt/schedule/", // the endpoint
     data: apptData,
 
-    success: function () {
+    success: function() {
+      getAppointments(startData);
       CloseAppt();
       console.log("Appt successfully scheduled!");
     }
@@ -82,16 +82,12 @@ function SubmitAppt(apptData) {
 
 //Searches for appointments
 function getAppointments(queryParam) {
-  console.log("create post is working!")
-  console.log(JSON.stringify(queryParam));
-
   $.ajax({
     type: "GET",
     url: "/find/appt/", // the endpoint
     data: queryParam,
     success: function (data) {
-      console.log("Searching...");
-      console.log("Yo I got your data here: ",data);
+
       populateTable(data);
     }
 
@@ -100,7 +96,23 @@ function getAppointments(queryParam) {
 }
 
 //Gets all appointments from the DB
-function buildTable() {
+function populateTable(dataObj) {
+
+  $(".container table #appointments").html("");
+
+  for(var i = 0; i< dataObj.length; i++){
+
+    var tableRow = $("<tr>");
+    var tableID = $("<td>" + dataObj[i].pk + "</td>");
+    var tableDate = $("<td>" + dataObj[i].fields.date + "</td>");
+    var tableTime = $("<td>" + dataObj[i].fields.time + "</td>");
+    var tableDescription = $("<td>" + dataObj[i].fields.description + "</td>");
+
+    console.log(tableDate);
+    tableRow.append(tableID,tableDate,tableTime,tableDescription);
+
+    $(".container table #appointments").append(tableRow);
+  }
 
 }
 

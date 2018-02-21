@@ -76,7 +76,6 @@
         <hr>
 
         <div class="container">
-            <!-- {% if appointment_records %} -->
                 <table class="table table-striped table-bordered text-center">
                     <thead>
                         <tr>
@@ -86,20 +85,11 @@
                             <th>Description</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- {% for appt in appointment_records %}
-                        <tr>
-                            <td>{{ appt.id }}</td>
-                            <td>{{ appt.date }}</td>
-                            <td>{{ appt.time }}</td>
-                            <td>{{ appt.description }}</td>
-                        </tr>
-                        {% endfor %} -->
+                    <tbody id="appointments">
+
                     </tbody>
                 </table>
-            <!-- {% else %}
-                <p>NO APPOINTMENTS FOUND!</p>
-            {% endif %} -->
+
         </div>
 
     </div>
