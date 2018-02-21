@@ -1,5 +1,5 @@
 from django.contrib import admin
-from scheduler.models import Appointments
+from scheduler.models import Appointment
 
 # Register your models here.
-admin.site.register(Appointments)
+admin.site.register(Appointment)
