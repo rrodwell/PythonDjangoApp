@@ -13,22 +13,33 @@ def index(request):
 
     return render(request,'scheduler/index.html', context=appt_dict)
 
-def new_appt(request):
+# def new_appt(request):
 
-    form = NewApptForm()
+#     form = NewApptForm()
 
+#     if request.method == "POST":
+#         form = NewApptForm(request.POST)
+#         print(form)
+
+#         if form.is_valid():
+#             form.save(commit=True)
+#             return index(request)
+
+#     return render(request,"scheduler/index.html", {"form":form})
+
+def schedule_appt(request):
     if request.method == "POST":
-        form = NewApptForm(request.POST)
-        print(form)
+        date = request.POST['date']
+        time = request.POST['time']
+        description = request.POST['description']
 
-        if form.is_valid():
-            form.save(commit=True)
-            return index(request)
+        Appointment.objects.create(
+            date = date,
+            time = time,
+            description = description
+        )
 
-    return render(request,"scheduler/index.html", {"form":form})
-
-
-
+        return HttpResponse('')
 # def new_appt(request):
 #     if request.method == 'POST':
 #         post_text = request.POST.get('the_post')

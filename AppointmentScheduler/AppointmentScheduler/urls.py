@@ -19,5 +19,6 @@ from scheduler import views
 
 urlpatterns = [
     url(r'^$',views.index, name='index'),
+    url(r'^appt/schedule/$', views.schedule_appt),
     url(r'^admin/', admin.site.urls),
 ]

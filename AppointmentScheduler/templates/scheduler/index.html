@@ -32,36 +32,19 @@
                 <button class="btn btn-outline-secondary" id="add-appt">
                     New Appointment
                 </button>
-                <!-- <button class="btn btn-outline-success" id="add-btn">
+                <button class="btn btn-outline-success" id="add-btn">
                     Add
-                </button> -->
+                </button>
                 <button class="btn btn-outline-danger" id="cancel-btn">
                     Cancel
                 </button>
             </div>
 
             <div id="appt-form">
-                <!-- <form method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="appt-date">Date (MM/DD/YY - ex: 01/01/89)</label>
-                        <input type="text" class="form-control" id="appt-date">
-                    </div>
-                    <div class="form-group">
-                            <label for="appt-time">Time (HH:MM - ex: 05:30)</label>
-                            <input type="text" class="form-control" id="appt-time">
-                    </div>
-                    <div class="form-group">
-                        <label for="appt-description">
-                            Description
-                        </label>
-                        <textarea type="text" class="form-control" id="appt-description" rows="3"></textarea>
-                    </div>
-                </form> -->
-                <form method="POST">
 
+                <form method="POST">{% csrf_token %}
                     <div class="form-group">
-                        <label for="appt-date">Date (MM/DD/YY - ex: 01/01/89)</label>
+                        <label for="appt-date">Date (YYYY-MM-DD - ex: 1999-01-25)</label>
                         <input type="text" class="form-control" id="id_date">
                     </div>
                     <div class="form-group">
@@ -75,9 +58,6 @@
                         <textarea type="text" class="form-control" id="id_description" rows="3"></textarea>
                     </div>
 
-                    {% csrf_token %}
-                    <input type="submit" class="btn btn-outline-success" value="Add">
-
                 </form>
             </div>
         </div>
@@ -85,11 +65,11 @@
         <hr>
 
         <div class="search-form">
-            <form class="form-inline">
+            <form class="form-inline">{% csrf_token %}
                 <div class="form-group">
                     <input type="text" class="form-control" id="search" placeholder="Enter description...">
                 </div>
-                <button action="/" type="submit" class="btn btn-outline-primary">Search</button>
+                <button type="submit" class="btn btn-outline-primary" id="search-btn">Search</button>
             </form>
         </div>
 
